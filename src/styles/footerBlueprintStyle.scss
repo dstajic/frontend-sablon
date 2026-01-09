@@ -1,0 +1,54 @@
+/* ======================================
+   FOOTER CONTAINER
+   ====================================== */
+.footer {
+  padding: 1.5rem;
+  padding-left: 0.5rem;
+
+  background-color: #413ca7; /* same as navbar for consistency */
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 0.9rem;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+/* ======================================
+   FOOTER LINKS
+   ====================================== */
+.footer .link {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  margin-right: 40px;
+  &:hover {
+    text-decoration: underline;
+    color: #d1d5db; /* lighter hover */
+  }
+}
+
+/* ======================================
+   FOOTER TEXT
+   ====================================== */
+.footer .footerText {
+  color: #f3f4f6;
+  font-size: 0.85rem;
+}
+
+/* ======================================
+   RESPONSIVE FOOTER
+   ====================================== */
+@media (max-width: 640px) {
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

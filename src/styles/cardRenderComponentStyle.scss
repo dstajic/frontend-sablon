@@ -1,0 +1,71 @@
+/* ======================================
+   CARD LIST CONTAINER
+   ====================================== */
+.cardListContainer {
+  display: flex;
+  flex-wrap: wrap; /* wrap cards to next row */
+  gap: 1.5rem;
+  padding: 2rem;
+
+  justify-content: center; /* center cards horizontally */
+}
+
+/* ======================================
+   CARD
+   ====================================== */
+.card {
+  flex: 1 1 220px; /* grow, shrink, basis */
+  max-width: 300px; /* optional max width */
+  height: 150px;
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  }
+
+  .cardTitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #222;
+  }
+
+  .cardSubtitle {
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  .cardLink {
+    margin-top: auto;
+    font-size: 0.85rem;
+    color: #4f46e5;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+/* ======================================
+   RESPONSIVE FLEX
+   ====================================== */
+@media (max-width: 640px) {
+  .cardListContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    max-width: 100%;
+  }
+}

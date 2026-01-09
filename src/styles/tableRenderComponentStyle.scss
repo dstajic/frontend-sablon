@@ -1,0 +1,82 @@
+/* ======================================
+   TABLE WRAPPER
+   ====================================== */
+.listPageContainer {
+  width: 100%;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  min-height: 50vh;
+  display: flex;
+  justify-content: center;
+  overflow-x: auto; /* omogućava horizontal scroll samo na table */
+}
+
+/* ======================================
+   TABLE
+   ====================================== */
+table {
+  width: 100%;
+  max-width: 900px; /* ograničava širinu */
+  min-width: 300px; /* opcionalno, da content ne slomi table */
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 1px 12px 30px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* TABLE HEAD */
+thead {
+  background: #4f46e5;
+  color: #ffffff;
+  text-align: left;
+
+  th {
+    padding: 0.9rem 1rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+}
+
+/* TABLE BODY */
+tbody {
+  tr {
+    border-bottom: 1px solid #e5e7eb;
+
+    &:hover {
+      background: #f3f4f6;
+    }
+  }
+
+  td {
+    padding: 0.8rem 1rem;
+    font-size: 0.88rem;
+    color: #333;
+
+    a {
+      color: #4f46e5;
+      text-decoration: none;
+      transition: all 0.2s ease;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+/* ======================================
+   RESPONSIVE TABLE
+   ====================================== */
+@media (max-width: 640px) {
+  .tableWrapper {
+    padding: 1rem;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
