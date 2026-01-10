@@ -1,53 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
 import "../../styles/createFormBlueprintStyle.scss";
 
+import ErrorPopup from "../sharedComponents/errorPopupBlueprint";
+import SuccessPopup from "../sharedComponents/sucessPopupBlueprint";
+import ConfirmationPopup from "../sharedComponents/confirmationPopupBlueprint";
+// import { createItem } from "../../services/itemService";
+
 const CreateFormBlueprint = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ mode: "onChange" });
+  const { register, handleSubmit } = useForm({ mode: "onChange" });
 
   const [errorMsg, setErrorMessage] = useState("");
-  const [showError, setShowError] = useState(false);
+  const [successMsg, setSuccessMessage] = useState("");
 
-  const onSubmit = async (data) => {
+  const [showError, setShowError] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+
+  const [formData, setFormData] = useState(null);
+
+  const handleCreate = async () => {
     try {
       const payload = {
-        ...data,
-        number: Number(data.number),
-        number2: Number(data.number2),
-        text: String(data.text),
-        date: data.date || null,
+        ...formData,
+        number: Number(formData.number),
+        number2: Number(formData.number2),
+        text: String(formData.text),
+        date: formData.date || null,
       };
 
       // await createItem(payload);
 
       console.log("Item created", payload);
-    } catch (error) {
-      if (error?.response?.status) {
-        if (error.response.status === 404) {
-          setErrorMessage(error.response.data?.error || "Resource not found.");
-        } else if (error.response.status === 500) {
-          setErrorMessage(
-            "Server is temporarily unavailable. Please try again later."
-          );
-        } else {
-          setErrorMessage(`Error: ${error.response.status}`);
-        }
-      } else if (error?.request) {
-        setErrorMessage(
-          "The server is not responding. Please try again later."
-        );
-      } else {
-        setErrorMessage("Something went wrong. Please try again.");
-      }
 
+      setSuccessMessage("Item successfully created!");
+      setShowSuccess(true);
+    } catch (error) {
+      setErrorMessage("Failed to create item.");
       setShowError(true);
-      console.log("Create failed:", error);
+    } finally {
+      setShowConfirmation(false);
     }
+  };
+
+  const onSubmit = (data) => {
+    setFormData(data);
+    setShowConfirmation(true);
   };
 
   return (
@@ -55,45 +53,49 @@ const CreateFormBlueprint = () => {
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <h3>Create Item</h3>
 
-        <label htmlFor="text">Text</label>
-        <input
-          type="text"
-          id="text"
-          placeholder="Text"
-          {...register("text", {
-            required: "Text is required",
-          })}
-        />
+        <label>Text</label>
+        <input {...register("text", { required: true })} />
 
-        <label htmlFor="date">Date</label>
-        <input type="date" id="date" {...register("date")} />
+        <label>Date</label>
+        <input type="date" {...register("date")} />
 
-        <label htmlFor="number">Number</label>
-        <input
-          type="number"
-          id="number"
-          placeholder="Number"
-          {...register("number", {
-            required: "Number is required",
-          })}
-        />
+        <label>Number</label>
+        <input type="number" {...register("number", { required: true })} />
 
-        <label htmlFor="number2">Number 2</label>
-        <input
-          type="number"
-          id="number2"
-          placeholder="Number 2"
-          {...register("number2", {
-            required: "Second number is required",
-          })}
-        />
-
-        {showError && <p className="errorMessage">{errorMsg}</p>}
+        <label>Number 2</label>
+        <input type="number" {...register("number2", { required: true })} />
 
         <button id="submitBtn" type="submit">
           Create
         </button>
       </form>
+
+      {/* ERROR */}
+      {showError && (
+        <ErrorPopup
+          message={errorMsg}
+          timeOut={2}
+          onClose={() => setShowError(false)}
+        />
+      )}
+
+      {/* SUCCESS */}
+      {showSuccess && (
+        <SuccessPopup
+          message={successMsg}
+          timeOut={2}
+          onClose={() => setShowSuccess(false)}
+        />
+      )}
+
+      {/* CONFIRMATION */}
+      {showConfirmation && (
+        <ConfirmationPopup
+          message="Are you sure you want to create this item?"
+          onYes={handleCreate}
+          onNo={() => setShowConfirmation(false)}
+        />
+      )}
     </div>
   );
 };

@@ -14,6 +14,9 @@ const NavbarBlueprint = () => {
       <Link className="link" to="/createItem">
         <p>Create item</p>
       </Link>
+      <Link className="link" to="/popups">
+        <p>Popups</p>
+      </Link>
     </div>
   );
 };

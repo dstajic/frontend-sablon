@@ -1,30 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { itemUpdate } from "../../services/itemService";
 import "../../styles/editFormBlueprintStyle.scss";
 
+import ErrorPopup from "../sharedComponents/errorPopupBlueprint";
+import SuccessPopup from "../sharedComponents/sucessPopupBlueprint";
+import ConfirmationPopup from "../sharedComponents/confirmationPopupBlueprint";
+
 const EditFormBlueprint = ({ item, onClose }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ mode: "onChange" });
+  const { register, handleSubmit } = useForm({ mode: "onChange" });
+
+  const [errorMsg, setErrorMessage] = useState("");
+  const [successMsg, setSuccessMessage] = useState("");
+
+  const [showError, setShowError] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const onSubmit = async (data) => {
+    setShowConfirmation(true);
+  };
+
+  const handleConfirmEdit = async () => {
+    setShowConfirmation(false);
+
     try {
       const payload = {
-        ...data,
+        ...dataRef,
         id: item.id,
-        date: data.date ? new Date(data.date).toISOString() : null,
+        date: dataRef.date ? new Date(dataRef.date).toISOString() : null,
       };
 
       await itemUpdate(item.id, payload);
 
-      console.log(`Edited item with id: ${item.id}`, payload);
-      onClose();
-    } catch (err) {
-      console.error(err);
+      setSuccessMessage("Item successfully updated!");
+      setShowSuccess(true);
+
+      setTimeout(() => onClose(), 2000);
+    } catch (error) {
+      setErrorMessage("Failed to update item.");
+      setShowError(true);
     }
+  };
+
+  const [dataRef, setDataRef] = useState(null);
+
+  const handleSubmitWrapper = (data) => {
+    setDataRef(data);
+    setShowConfirmation(true);
   };
 
   const formattedDate = item.date
@@ -33,54 +56,61 @@ const EditFormBlueprint = ({ item, onClose }) => {
 
   return (
     <div className="editFormContainer">
-      <form className="form" onSubmit={handleSubmit(onSubmit)}>
+      <form className="form" onSubmit={handleSubmit(handleSubmitWrapper)}>
         <h3>Edit Item</h3>
 
-        <label htmlFor="text">Text</label>
+        <label>Text</label>
         <input
-          type="text"
-          id="text"
-          placeholder="Text"
           defaultValue={item.text}
-          {...register("text", {
-            required: "Text is required",
-          })}
+          {...register("text", { required: true })}
         />
 
-        <label htmlFor="date">Date</label>
-        <input
-          type="date"
-          id="date"
-          defaultValue={formattedDate}
-          {...register("date")}
-        />
+        <label>Date</label>
+        <input type="date" defaultValue={formattedDate} {...register("date")} />
 
-        <label htmlFor="number">Number</label>
+        <label>Number</label>
         <input
           type="number"
-          id="number"
-          placeholder="Number"
           defaultValue={item.number}
-          {...register("number", {
-            required: "Number is required",
-          })}
+          {...register("number", { required: true })}
         />
 
-        <label htmlFor="number2">Number 2</label>
+        <label>Number 2</label>
         <input
           type="number"
-          id="number2"
-          placeholder="Number 2"
           defaultValue={item.number2}
-          {...register("number2", {
-            required: "Second number is required",
-          })}
+          {...register("number2", { required: true })}
         />
 
-        <button id="submitBtn" type="submit">
-          Edit
-        </button>
+        <button type="submit">Edit</button>
       </form>
+
+      {/* ERROR */}
+      {showError && (
+        <ErrorPopup
+          message={errorMsg}
+          timeOut={2}
+          onClose={() => setShowError(false)}
+        />
+      )}
+
+      {/* SUCCESS */}
+      {showSuccess && (
+        <SuccessPopup
+          message={successMsg}
+          timeOut={2}
+          onClose={() => setShowSuccess(false)}
+        />
+      )}
+
+      {/* CONFIRMATION */}
+      {showConfirmation && (
+        <ConfirmationPopup
+          message="Are you sure you want to edit this item?"
+          onYes={handleConfirmEdit}
+          onNo={() => setShowConfirmation(false)}
+        />
+      )}
     </div>
   );
 };
