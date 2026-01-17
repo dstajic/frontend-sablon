@@ -20,3 +20,12 @@ export async function itemDelete(id) {
   const response = await AxiosConfig.delete(`${RESOURCE}/${id}`); //id [FromQuery]
   return response.data;
 }
+export async function getAllItemsPaginated(page, pageSize) {
+  const response = await AxiosConfig.get(`${RESOURCE}/authorsItems`, {
+    params: {
+      page,
+      pageSize,
+    },
+  });
+  return response.data;
+}

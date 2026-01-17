@@ -17,6 +17,9 @@ const NavbarBlueprint = () => {
       <Link className="link" to="/popups">
         <p>Popups</p>
       </Link>
+      <Link className="link" to="/paginatedPage">
+        <p>Paginated Items</p>
+      </Link>
     </div>
   );
 };
