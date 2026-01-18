@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import SuccessPopup from "../components/sharedComponents/sucessPopupBlueprint";
 import ErrorPopupBlueprint from "../components/sharedComponents/errorPopupBlueprint";
 import ConfirmationPopup from "../components/sharedComponents/confirmationPopupBlueprint";
-
+import Spinner from "./sharedComponents/Spinner";
+import "../styles/panelStyle.scss";
 const PopupTestPanel = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
@@ -25,6 +26,10 @@ const PopupTestPanel = () => {
         <button onClick={() => setShowConfirmation(true)}>
           Open Confirmation Popup
         </button>
+
+        <div className="testClass">
+          <Spinner></Spinner>
+        </div>
       </div>
 
       {/* SUCCESS */}
