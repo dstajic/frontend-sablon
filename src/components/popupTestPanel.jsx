@@ -28,7 +28,7 @@ const PopupTestPanel = () => {
         </button>
 
         <div className="testClass">
-          <Spinner></Spinner>
+          <Spinner/>
         </div>
       </div>
 

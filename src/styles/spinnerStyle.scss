@@ -7,7 +7,14 @@
   animation: spin 0.8s linear infinite;
   transform-origin: center;
 }
+.spinner-text{
+  color: gray;
+  font-weight: bold;
+}
 
+.spinner-text-hidden{
+  display: none;
+}
 .spinner-scale {
   transform: scale(min(1, calc(min(100vw, 100vh) / 600)));
 }
