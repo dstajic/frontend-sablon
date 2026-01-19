@@ -1,3 +1,5 @@
+@use "globals.scss" as *;
+@use "sass:color";
 /* Overlay sa blur efektom */
 #Overlay {
   position: fixed;
@@ -81,6 +83,6 @@
   cursor: pointer;
 
   &:hover {
-    background-color: darken(#ea9332, 8%);
+    background-color: color.adjust(#ea9332, $lightness: -8%)
   }
 }

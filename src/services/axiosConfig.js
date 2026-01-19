@@ -3,6 +3,7 @@ import axios, { Axios } from "axios";
 const AxiosConfig = axios.create({
   baseURL: "https://localhost:7251/", //link backenda
 });
+
 AxiosConfig.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
