@@ -22,13 +22,16 @@ const App = () => {
             <Route path="/item2" element={<TableRenderComponent />}></Route>
             <Route path="/createItem" element={<CreateFormBlueprint />}></Route>
             <Route path="/popups" element={<PopupTestPanel />}></Route>
-            <Route path="/paginatedPage" element={<PaginatedComponent />}></Route>
+            <Route
+              path="/paginatedPage"
+              element={<PaginatedComponent />}
+            ></Route>
           </Routes>
           <FooterBlueprint />
         </BrowserRouter>
       </UserContext.Provider>
     </div>
-  )
+  );
 };
 
 export default App;
