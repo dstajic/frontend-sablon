@@ -33,7 +33,7 @@ const App = () => {
         </BrowserRouter>
       </UserContext.Provider>
     </div>
-  )
+  );
 };
 
 export default App;
