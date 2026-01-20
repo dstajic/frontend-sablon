@@ -1,3 +1,5 @@
+@use "./variables" as *;
+
 /* ======================================
    FOOTER CONTAINER
    ====================================== */
@@ -5,7 +7,7 @@
   padding: 1.5rem;
   padding-left: 0.5rem;
 
-  background-color: #413ca7; /* same as navbar for consistency */
+  background-color: $primaryColor; /* same as navbar for consistency */
   color: #ffffff;
   display: flex;
   justify-content: space-between;

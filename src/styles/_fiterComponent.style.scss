@@ -1,0 +1,38 @@
+.filter-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .filter-control {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+
+        .filter-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #4b5563;
+            text-transform: capitalize;
+        }
+
+        .filter-input {
+            padding: 0.45rem 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background-color: #ffffff;
+            font-size: 0.9rem;
+            color: #1f2937;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+            &:focus {
+                outline: none;
+                border-color: #3b82f6; // Plava boja pri fokusu
+                box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+            }
+
+            &::placeholder {
+                color: #9ca3af;
+            }
+        }
+    }
+}

@@ -1,3 +1,5 @@
+@use "./variables";
+
 /* ======================================
    NAVBAR CONTAINER
    ====================================== */
@@ -6,13 +8,15 @@
   align-items: center;
   gap: 1.5rem;
   padding: 1rem 2rem;
-  background-color: #4f46e5; /* modern gradient color if needed */
+  background-color: variables.$primaryColor;
+  /* modern gradient color if needed */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* ======================================
    LINKS
    ====================================== */
+   
 .link {
   text-decoration: none;
   color: #ffffff;

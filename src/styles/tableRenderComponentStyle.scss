@@ -1,3 +1,4 @@
+@use "./variables";
 .listPageContainer {
   width: 100%;
   padding: 2rem 0;
@@ -18,7 +19,7 @@
         th {
           position: sticky;
           top: 0;
-          background: #4f46e5;
+          background: variables.$primaryColor;
           color: #ffffff;
           z-index: 10;
           padding: 0.9rem 1rem;

@@ -1,3 +1,7 @@
+@use "./fiterComponent.style";
+@use "./sortComponent.style";
+@use "./variables" as *;
+
 .authorsPageContainer {
   display: flex;
   flex-direction: column;
@@ -68,6 +72,40 @@
 
     span {
       font-weight: 500;
+    }
+  }
+
+  /* FILTER SEKCIJA */
+  .filter-sort-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-end;
+    justify-content: center;
+
+    padding: 1rem 1.25rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background-color: #fafafa;
+    width: 80%;
+    max-width: 900px;
+  }
+
+  /* APPLY BUTTON */
+  .applay-filters-button {
+    padding: 0.5rem 1.1rem;
+    border-radius: 6px;
+    border: 1px solid $primaryColor;
+    background-color: $primaryColor;
+    color: #ffffff;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    height: 36px;
+
+    &:hover {
+      background-color: $primaryColor;
+      color: #6366f1;
     }
   }
 }

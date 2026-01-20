@@ -65,9 +65,11 @@ const PaginatedSortedFiltertedExampleOfUseComponent = () => {
   */
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
-  const [filter, setFilter] = useState({ text: null, number: null, dateTime: null })
+  const [draftFilter, setDraftFilter] = useState({ text: null, number: null, dateTime: null })
+  const [appliedfilter, setAppliedFilter] = useState(null)
   const [hasNextPage, setHasNextPage] = useState(null);
   const [hasPreviosPage, setHasPreviousPage] = useState(null);
+  const [chosenType, setChosenType] = useState("");
 
 
   // Error popup state
@@ -194,15 +196,27 @@ const PaginatedSortedFiltertedExampleOfUseComponent = () => {
       */}
       {
         <div className="filter-sort-section">
-          <FilterComponent filter={filter} setFilter={setFilter} />
+          <FilterComponent filter={draftFilter} setFilter={setDraftFilter} />
           <SortComponent
             sortTypes={[
               { key: 1, name: "a" },
               { key: 2, name: "danas" },
               { key: 3, name: "Sutra" }
             ]}
-            choosenType={"a"}
+            onSortChange={setChosenType}
           />
+
+          <button
+            className="applay-filters-button"
+            onClick={() => {
+              setAppliedFilter(draftFilter);
+              console.log(draftFilter)
+              console.log(chosenType)
+              setPage(1)
+            }}
+          >
+            Apply filters
+          </button>
         </div>
       }
 
