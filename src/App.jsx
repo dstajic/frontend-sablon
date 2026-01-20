@@ -7,7 +7,7 @@ import NavbarBlueprint from "./components/sharedComponents/NavBarBlueprint";
 import CreateFormBlueprint from "./components/forms/CreateFormBlueprint";
 import PopupTestPanel from "./components/popupTestPanel";
 import "./styles/globals.scss";
-import PaginatedComponent from "./components/pages/PaginatedComponent";
+import PaginatedSortedFiltertedExampleOfUseComponent from "./components/sharedComponents/PaginatedSortedFiltertedExampleOfUseComponent";
 import UserContext from "./components/sharedComponents/userContext";
 
 const App = () => {
@@ -22,7 +22,12 @@ const App = () => {
             <Route path="/item2" element={<TableRenderComponent />}></Route>
             <Route path="/createItem" element={<CreateFormBlueprint />}></Route>
             <Route path="/popups" element={<PopupTestPanel />}></Route>
-            <Route path="/paginatedPage" element={<PaginatedComponent />}></Route>
+            <Route path="/paginatedPage"
+              element={
+                < PaginatedSortedFiltertedExampleOfUseComponent />
+              }>
+
+            </Route>
           </Routes>
           <FooterBlueprint />
         </BrowserRouter>

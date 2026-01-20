@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
-import ErrorPopupBlueprint from "../sharedComponents/errorPopupBlueprint";
-import "../../styles/paginatedComponent.scss";
+import ErrorPopupBlueprint from "./errorPopupBlueprint";
+import "../../styles/paginatedComponentStyle.scss";
+import SortComponent from "./SortComponent";
+import FilterComponent from "./FilterComponent";
+import PaginationComponent from "./PaginationComponet";
 
 /*
   ============================
@@ -10,7 +13,7 @@ import "../../styles/paginatedComponent.scss";
   import { getAllItemsPaginated } from "../services/itemsService";
 */
 
-const PaginatedComponent = () => {
+const PaginatedSortedFiltertedExampleOfUseComponent = () => {
   /*
     ============================
     MOCK DATA (DESIGN TESTING)
@@ -62,6 +65,10 @@ const PaginatedComponent = () => {
   */
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
+  const [filter, setFilter] = useState({ text: null, number: null, dateTime: null })
+  const [hasNextPage, setHasNextPage] = useState(null);
+  const [hasPreviosPage, setHasPreviousPage] = useState(null);
+
 
   // Error popup state
   const [errorMessage, setErrorMessage] = useState(null);
@@ -98,6 +105,11 @@ const PaginatedComponent = () => {
 
     setItems(mockItems.slice(startIndex, endIndex));
   };
+
+  useEffect(() => {
+    paginateMockData(page);
+  }, [page]);
+
 
   /*
     ============================
@@ -180,6 +192,19 @@ const PaginatedComponent = () => {
         ------------------------------
         {loading && <p>Loading...</p>}
       */}
+      {
+        <div className="filter-sort-section">
+          <FilterComponent filter={filter} setFilter={setFilter} />
+          <SortComponent
+            sortTypes={[
+              { key: 1, name: "a" },
+              { key: 2, name: "danas" },
+              { key: 3, name: "Sutra" }
+            ]}
+            choosenType={"a"}
+          />
+        </div>
+      }
 
       <table>
         <thead>
@@ -200,21 +225,14 @@ const PaginatedComponent = () => {
         </tbody>
       </table>
 
-      <div style={{ marginTop: "1rem" }}>
-        <button onClick={prevPage} disabled={page === 1}>
-          ←
-        </button>
-
-        <span style={{ margin: "0 1rem" }}>
-          Page {page} of {totalPages}
-        </span>
-
-        <button onClick={nextPage} disabled={page === totalPages}>
-          →
-        </button>
-      </div>
+      <PaginationComponent
+        page={page}
+        totalPages={totalPages}
+        hasNextPage={nextPage}        //setHasNextPage kada se ubaci baza
+        hasPreviousPage={prevPage}    //setHasPreviousPage kada se ubaci baza
+      />
     </div>
   );
 };
 
-export default PaginatedComponent;
+export default PaginatedSortedFiltertedExampleOfUseComponent;
