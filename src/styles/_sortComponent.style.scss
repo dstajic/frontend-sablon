@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
+    max-width: 300px; //ako je samostalni element na stranici ovde mu se podesava sirina
 
     span {
         font-size: 0.85rem;

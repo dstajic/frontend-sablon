@@ -1,5 +1,6 @@
 import React from "react";
-export function HandleError(error, setErrorMessage, setShowError, setIsLoading, badRequestmessage = "", NotFoundMessage = "", entity = "Item") {
+
+export default function HandleError(error, setErrorMessage, setShowError, setIsLoading, badRequestmessage = "", NotFoundMessage = "", entity = "Item") {
     if (error.status) {
         switch (error.status) {
             case 400:

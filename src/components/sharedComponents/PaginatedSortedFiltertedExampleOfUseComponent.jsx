@@ -4,7 +4,7 @@ import "../../styles/paginatedComponentStyle.scss";
 import SortComponent from "./SortComponent";
 import FilterComponent from "./FilterComponent";
 import PaginationComponent from "./PaginationComponet";
-
+import HandleError from "./HandleError";
 /*
   ============================
   BACKEND IMPORT (FUTURE USE)
@@ -70,6 +70,7 @@ const PaginatedSortedFiltertedExampleOfUseComponent = () => {
   const [hasNextPage, setHasNextPage] = useState(null);
   const [hasPreviosPage, setHasPreviousPage] = useState(null);
   const [chosenType, setChosenType] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
 
   // Error popup state
@@ -171,11 +172,41 @@ const PaginatedSortedFiltertedExampleOfUseComponent = () => {
     }
   };
 
+
+
+  // =================================================
+  // BACKEND FILTERED AND PAGINATED AND SORTED (FUTURE)
+  // =================================================
+  /*
+  
+  const fetchFilteredSortedAndPaginatedItems = async () => {
+    try {
+      const FilteredSortedAndPaginatedItems = await getFilteredAndSortedItemsFromDB(
+        appliedfilter,
+        chosenType,
+        page
+      );
+      setItems(FilteredSortedAndPaginatedItems)
+    } catch (error) {
+      <HandleError error={error} />  // U ovaj tag idu podaci koji se salju za gresku
+    }
+    finally {
+      setIsLoading(false);
+    }
+  }
+
+ PRI SVAKOJ PROMENI appliedfilter, chosenType, page RADI SE fetch
+  useEffect(() => {
+    fetchFilteredSortedAndPaginatedItems();
+  }, [appliedfilter, chosenType, page])*/
+
+
   /*
     ============================
     RENDER
     ============================
   */
+
   return (
     <div className="authorsPageContainer">
       <h2>Items</h2>
@@ -195,6 +226,7 @@ const PaginatedSortedFiltertedExampleOfUseComponent = () => {
         {loading && <p>Loading...</p>}
       */}
       {
+        //NAPOMENE ZA OVAJ DEO KOMPONENTE
         <div className="filter-sort-section">
           <FilterComponent filter={draftFilter} setFilter={setDraftFilter} />
           <SortComponent
@@ -203,16 +235,28 @@ const PaginatedSortedFiltertedExampleOfUseComponent = () => {
               { key: 2, name: "danas" },
               { key: 3, name: "Sutra" }
             ]}
-            onSortChange={setChosenType}
+            onSortChange={(newSort) => {
+              setChosenType(newSort);
+              setPage(1); //treba samo proveriti da li da default bude nula ili 1 mislim da bi jedan bilo pogresno jer se treba za page staviti nula i pri slanju na backend ide page +1
+              console.log(newSort)
+            }}
+
           />
 
           <button
             className="applay-filters-button"
             onClick={() => {
+              /* 
+              - u ovom delu se moze pozvati neka metoda koja bi slala podatke o filteru i sortu na backend
+              npr: fetchFilteredAndSortedItems(appliedfilter, chosenType) postvljena iznad.
+
+              - ukoliko treba da se razdvoje filter i sort kao sto obicno i budu razdvojeni 
+              prave se dve odvojene metode jedna za sort druga za filter tako da mogu odvojeno da se aktiviraju
+              - takode setPage treba da postavlja na zeljenu stranu kada se podaci filtriraju aplikacija treba da se vrati na pocetnu stranu takodje i pri sortu.
+              */
               setAppliedFilter(draftFilter);
-              console.log(draftFilter)
-              console.log(chosenType)
               setPage(1)
+              console.log(draftFilter)
             }}
           >
             Apply filters
