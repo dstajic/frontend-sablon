@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function HandleError(error, setErrorMessage, setShowError, setIsLoading, badRequestmessage = "", NotFoundMessage = "", entity = "Item") {
+function HandleError(error, setErrorMessage, setShowError, badRequestmessage = "", NotFoundMessage = "", entity = "Item") {
     if (error.status) {
         switch (error.status) {
             case 400:
@@ -29,8 +29,8 @@ export default function HandleError(error, setErrorMessage, setShowError, setIsL
 
     setShowError(true);
     console.log(`An error occurred while processing ${entity}:`, error);
-    setIsLoading(false);
 }
+export default HandleError;
 
 /*U .jsx fajlu se stavlja:
 

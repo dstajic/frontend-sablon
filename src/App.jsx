@@ -9,25 +9,41 @@ import PopupTestPanel from "./components/popupTestPanel";
 import "./styles/globals.scss";
 import PaginatedSortedFiltertedExampleOfUseComponent from "./components/sharedComponents/PaginatedSortedFiltertedExampleOfUseComponent";
 import UserContext from "./components/sharedComponents/userContext";
+import Login from "./components/pages/Login";
 
 const App = () => {
   const [user, setUser] = useState(null);
+
+  //UseEffect ZA PROMENU USERA:
+
+  //  useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   if (token) {
+  //     try {
+  //       const payload = JSON.parse(atob(token.split(".")[1]));
+  //       setUser(payload);
+  //     } catch (error) {
+  //       console.error("Invalid token:", error);
+  //       localStorage.removeItem("token");
+  //     }
+  //   }
+  // }, []); 
+
   return (
     <div className="app-container">
       <UserContext.Provider value={{ user, setUser }}>
         <BrowserRouter>
           <NavbarBlueprint />
           <Routes>
-            <Route path="/item1" element={<CardRenderComponent />}></Route>
-            <Route path="/item2" element={<TableRenderComponent />}></Route>
-            <Route path="/createItem" element={<CreateFormBlueprint />}></Route>
-            <Route path="/popups" element={<PopupTestPanel />}></Route>
+            <Route path="/item1" element={<CardRenderComponent />} />
+            <Route path="/item2" element={<TableRenderComponent />} />
+            <Route path="/createItem" element={<CreateFormBlueprint />} />
+            <Route path="/popups" element={<PopupTestPanel />} />
             <Route path="/paginatedPage"
               element={
                 < PaginatedSortedFiltertedExampleOfUseComponent />
-              }>
-
-            </Route>
+              } />
+            <Route path="/login" element={<Login />} />
           </Routes>
           <FooterBlueprint />
         </BrowserRouter>
