@@ -4,8 +4,8 @@
 .login-main-container {
     display: flex;
     justify-content: center;
-    margin-top: 200px;
-    flex: 1;
+    align-items: center;
+    height: 88vh;
 
     .login-container {
         display: flex;
@@ -16,10 +16,12 @@
         padding: 1rem;
         border-radius: 15px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+        max-height: 19rem;
 
         .login-title {
             text-align: center;
-            color: $darkBlue;
+            font-weight: bold;
+            color: color.adjust($button-color, $lightness: -20%);
         }
 
         form {
@@ -39,6 +41,7 @@
         label {
             font-weight: bold;
             font-size: 18px;
+            color: color.adjust($button-color, $lightness: -20%);
         }
 
         input {

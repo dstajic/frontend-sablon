@@ -1,3 +1,5 @@
+@use "./variables" as*;
+
 .sort-component-wrapper {
     display: flex;
     flex-direction: column;
@@ -21,7 +23,7 @@
 
         &:focus {
             outline: none;
-            border-color: #3b82f6;
+            border-color: $focused;
         }
     }
 }

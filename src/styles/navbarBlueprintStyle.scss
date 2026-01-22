@@ -5,6 +5,7 @@
    ====================================== */
 .navbar {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 1.5rem;
   padding: 1rem 2rem;
@@ -16,7 +17,39 @@
 /* ======================================
    LINKS
    ====================================== */
-   
+
+.link-section {
+  display: flex;
+
+  a {
+    font-size: 17px;
+  }
+}
+
+.logged-out-user-section {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+#logout-button,
+#login-button {
+  min-width: 70px;
+  padding: 7px;
+  border-radius: 5px;
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
+  color: variables.$primaryColor;
+  background-color: #ffffff;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #C7D2FE;
+    color: #ffffff;
+  }
+}
+
 .link {
   text-decoration: none;
   color: #ffffff;

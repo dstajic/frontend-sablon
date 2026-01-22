@@ -15,7 +15,6 @@ const Login = () => {
     const [errorMsg, setErrorMsg] = useState("");
     const [showError, setShowError] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-    const [isGoogleLogin, setIsGoogleLogin] = useState(false);
 
 
     const handleSubmit = async (e) => {
@@ -67,7 +66,7 @@ const Login = () => {
 
 
 
-            {errorMsg &&
+            {showError && errorMsg &&
                 <ErrorPopupBlueprint
                     message={errorMsg}
                     timeOut={2}
