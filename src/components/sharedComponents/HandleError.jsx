@@ -1,16 +1,16 @@
 import React from "react";
 
-function HandleError(error, setErrorMessage, setShowError, badRequestmessage = "", NotFoundMessage = "", entity = "Item") {
-    if (error.status) {
-        switch (error.status) {
+export default function HandleError(error, setErrorMessage, setShowError, badRequestmessage = "", NotFoundMessage = "", entity = "Item") {
+    if (error.response && error.response.status) {
+        switch (error.response.status) {
             case 400:
                 setErrorMessage(`${badRequestmessage}. Please check your input and try again.`);
                 break;
             case 401:
-                message = "You are not authorized. Please log in again.";
+                setErrorMessage("Invalid credentials. Please try log in again.");
                 break;
             case 403:
-                message = "You do not have permission to access this resource.";
+               setErrorMessage("You do not have permission to access this resource.");
                 break;
             case 404:
                 setErrorMessage(`${NotFoundMessage} was not found.`);
@@ -30,7 +30,6 @@ function HandleError(error, setErrorMessage, setShowError, badRequestmessage = "
     setShowError(true);
     console.log(`An error occurred while processing ${entity}:`, error);
 }
-export default HandleError;
 
 /*U .jsx fajlu se stavlja:
 
